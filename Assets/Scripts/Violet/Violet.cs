@@ -1,9 +1,18 @@
-using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class Player : Mobs
+public class Violet : Mobs
 {
+    public VioletIdleState idleState { get;private set; }
+    
+    public VioletMoveState moveState { get;private set; }
+    
+    public VioletStateMachine stateMachine { get;private set; }
+    public VioletJumpState jumpState { get;private set; }
+    public VioletAirState airState { get;private set; }
+    public VioletDashState dashState { get;private set; }
+    public VioletWallSlideState wallSlideState { get;private set; }
+    public VioletWallJumpState wallJumpState { get;private set; }
+    
     [SerializeField] private float horizonSpeed;
 
 
@@ -11,12 +20,15 @@ public class Player : Mobs
     [Header("Move Settings")]
     [SerializeField] private bool isMoving;
     [SerializeField] private float jumpSpeed;
-    
+    [SerializeField] public float wallSlideSpeed { get;private set; } = -3f;
+    [SerializeField] public float moveSpeed { get; private set; } = 9f;
+
     [Header("dash")] 
-    [SerializeField] private float dashDuration;
-    [SerializeField] private float dashTime;
-    [SerializeField] private float dashSpeed;
-    [SerializeField] private float dashCoolDownTime;    
+    [SerializeField] public float dashDuration { get; private set; } = 0.20f;
+
+    [SerializeField] public float dashTimer { get; private set; } = 0;
+    [SerializeField] public float dashSpeed { get; private set; } = 35f;
+    [SerializeField] public float dashCoolDownTime { get; private set; } = 0.6f;
 
     // [SerializeField] private bool dashCoolDown;
     
@@ -25,7 +37,7 @@ public class Player : Mobs
     [SerializeField] private float minJumpHeight = 1.5f;   // 短跳最小高度
     [SerializeField] private float maxJumpHeight = 3f;     // 长跳最大高度
     [SerializeField] private float jumpTimeThreshold; // 长按时间阈值
-    [SerializeField] private float longJumpSpeed;
+    [SerializeField] public float longJumpSpeed { get;private set; }
     private float longJumpRate;
     private float jumpStartTime;  // 记录跳跃开始时间
     private bool isPressingJumping;       // 标记是否正在跳跃
@@ -36,13 +48,30 @@ public class Player : Mobs
     private float comboTimeWindow;
     private bool isAttacking;
     private int comboCounter;
+    
 
+    public override void Awake()
+    {
+        
+        stateMachine = new VioletStateMachine();
 
+        moveState = new VioletMoveState(stateMachine, this, "Move");
+        
+        idleState = new VioletIdleState(stateMachine, this, "Idle");
+        jumpState = new VioletJumpState(stateMachine, this, "Jump");
+        airState = new VioletAirState(stateMachine, this, "Jump");
+        dashState = new VioletDashState(stateMachine, this, "Dash");
+        wallSlideState = new VioletWallSlideState(stateMachine, this, "WallSlide");
+        wallJumpState = new VioletWallJumpState(stateMachine, this, "Jump");
+        
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
     {
-        
+
         base.Start();
+        stateMachine.Initialize(idleState);
+        
         horizonSpeed = 5f;
         jumpSpeed = 7;
         longJumpSpeed = 14;
@@ -50,28 +79,28 @@ public class Player : Mobs
         // facingDirection = 1;
         longJumpRate = (float)0.025;
         facingRight = true;
-        dashTime = 0;
-        dashSpeed = 18;
-        dashDuration = 0.15f;
-        dashCoolDownTime = 0.2f;
+        
         //GroundCheckDistance = (float)1.26;
     }
 
     // Update is called once per frame
     protected override void Update()
     {
-        base.Update();
-        CheckInput();
-        Movement();
-        JumpCheck();
-
-        comboTimeWindow -= Time.deltaTime;
-        HandleJumpHeight(); // 跳高控制
-        FlipController();
-        AnimatorController();
-        Debug.Log(isGrounded);
+        stateMachine.currentState.Update();
+        DashCheck();
+        // base.Update();
+        // CheckInput();
+        // Movement();
+        // JumpCheck();
+        //
+        // comboTimeWindow -= Time.deltaTime;
+        // HandleJumpHeight(); // 跳高控制
+        // FlipController();
+        // AnimatorController();
+        // Debug.Log(isGrounded);
     }
-
+    
+    
     private void HandleJumpHeight()
     {
         if (isPressingJumping)
@@ -116,11 +145,11 @@ public class Player : Mobs
         {
             jumpKeyHeld = false;
         }
-        dashTime -= Time.deltaTime;
-        if (dashTime <  - dashCoolDownTime && Input.GetKeyDown(KeyCode.F))
-        {
-            dashTime = dashDuration;
-        }
+        // dashTime -= Time.deltaTime;
+        // if (dashTime <  - dashCoolDownTime && Input.GetKeyDown(KeyCode.F))
+        // {
+        //     dashTime = dashDuration;
+        // }
 
         if (Input.GetKeyDown(KeyCode.J))
         {
@@ -128,10 +157,21 @@ public class Player : Mobs
         }
 
     }
+
+    private void DashCheck()
+    {
+        dashTimer -= Time.deltaTime;
+        
+        if (Input.GetKey(KeyCode.F) && dashTimer <= 0)
+        {
+            stateMachine.ChangeState(dashState);
+            dashTimer = dashCoolDownTime;
+        }
+    }
     
     private void Movement()
     {
-        if (dashTime > 0)
+        if (dashTimer > 0)
         {
             rb.linearVelocity = new Vector2(facingDirection * dashSpeed, 0);
         }
@@ -159,20 +199,24 @@ public class Player : Mobs
         isMoving = rb.linearVelocity.x != 0;
         anim.SetBool("isMoving", isMoving);
         anim.SetBool("isGrounded", isGrounded);
-        anim.SetBool("isDashing", dashTime > 0);
+        anim.SetBool("isDashing", dashTimer > 0);
         anim.SetBool("isAttacking", isAttacking);
         anim.SetInteger("comboCounter", comboCounter);
     }
 
-
-
-    private void FlipController()
+    public override void SetVelocity(float _XVelocity, float _YVelocity)
     {
-        if (rb.linearVelocity.x > 0 && !facingRight)
+        rb.linearVelocity = new Vector2(_XVelocity, _YVelocity);
+        FlipController(_XVelocity);
+    }
+
+    private void FlipController(float _XVelocity)
+    {
+        if (_XVelocity > 0 && !facingRight)
         {
             Flip();
         }
-        else if (rb.linearVelocity.x < 0 && facingRight)
+        else if (_XVelocity < 0 && facingRight)
         {
             Flip();
         }

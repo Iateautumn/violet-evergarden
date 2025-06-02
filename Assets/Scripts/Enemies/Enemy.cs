@@ -1,8 +1,10 @@
 using UnityEngine;
 
-public class mobs : MonoBehaviour
+public class Enemy : Mobs
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
+    
     void Start()
     {
         
