@@ -11,6 +11,7 @@ public class VioletState
     
     protected float stateTimer;
     protected float xInput;
+    protected bool triggerCalled;
     public VioletState(VioletStateMachine _stateMachine, Violet _violet, string _animBoolName)
     {
         this.stateMachine = _stateMachine;
@@ -23,6 +24,7 @@ public class VioletState
 
         violet.anim.SetBool(animBoolName, true);
         rb = violet.rb;
+        this.triggerCalled = false;
     }
 
     public virtual void Update()
@@ -63,6 +65,10 @@ public class VioletState
         // {
         //     StartAttackEvent();
         // }
+    }
 
+    public virtual void AnimFinishTrigger()
+    {
+        triggerCalled = true;
     }
 }

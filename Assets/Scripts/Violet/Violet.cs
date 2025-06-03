@@ -12,6 +12,8 @@ public class Violet : Mobs
     public VioletDashState dashState { get;private set; }
     public VioletWallSlideState wallSlideState { get;private set; }
     public VioletWallJumpState wallJumpState { get;private set; }
+    public VioletPrimaryAttackState primaryAttackState { get;private set; }
+    public VioletAirAttackState airAttackState { get; private set; }
     
     [SerializeField] private float horizonSpeed;
 
@@ -44,6 +46,8 @@ public class Violet : Mobs
     private bool jumpKeyHeld;     // 标记跳跃键是否被按住
 
     [Header("Attack Settings")]
+    [SerializeField] public float attackCoolDownTime { get; private set; } = 0.4f;
+    [SerializeField] public float attackTimer = 0;
     private float comboTime = 0.3f;
     private float comboTimeWindow;
     private bool isAttacking;
@@ -63,6 +67,8 @@ public class Violet : Mobs
         dashState = new VioletDashState(stateMachine, this, "Dash");
         wallSlideState = new VioletWallSlideState(stateMachine, this, "WallSlide");
         wallJumpState = new VioletWallJumpState(stateMachine, this, "Jump");
+        primaryAttackState = new VioletPrimaryAttackState(stateMachine, this, "Attack");
+        airAttackState = new VioletAirAttackState(stateMachine, this, "Attack");
         
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -88,6 +94,7 @@ public class Violet : Mobs
     {
         stateMachine.currentState.Update();
         DashCheck();
+        AttackCheck();
         // base.Update();
         // CheckInput();
         // Movement();
@@ -158,6 +165,10 @@ public class Violet : Mobs
 
     }
 
+    private void AttackCheck()
+    {
+        attackTimer -= Time.deltaTime;
+    }
     private void DashCheck()
     {
         dashTimer -= Time.deltaTime;
@@ -246,5 +257,7 @@ public class Violet : Mobs
         isAttacking = true;
         comboTimeWindow = comboTime;
     }
+
+    public void AnimEndTrigger() => stateMachine.currentState.AnimFinishTrigger();
 
 }

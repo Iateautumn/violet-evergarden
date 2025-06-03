@@ -15,6 +15,12 @@ public class VioletJumpState : VioletState
     public override void Update()
     {
         base.Update();
+        if (Input.GetKeyDown(KeyCode.J) && violet.attackTimer < 0)
+        {
+            violet.stateMachine.ChangeState(violet.airAttackState);
+            violet.attackTimer = violet.attackCoolDownTime;
+            return;
+        }
         if (violet.isWallDetected())
         {
             violet.stateMachine.ChangeState(violet.wallSlideState);

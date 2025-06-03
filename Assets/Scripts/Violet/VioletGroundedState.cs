@@ -19,6 +19,16 @@ public class VioletGroundedState : VioletState
         {
             violet.stateMachine.ChangeState(violet.airState);
         }
+
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            if (violet.attackTimer < 0)
+            {
+                stateMachine.ChangeState(violet.primaryAttackState);
+                violet.attackTimer = violet.attackCoolDownTime;
+            }
+            
+        }
         if (Input.GetKeyDown(KeyCode.Space))
         {
             violet.stateMachine.ChangeState(violet.jumpState);

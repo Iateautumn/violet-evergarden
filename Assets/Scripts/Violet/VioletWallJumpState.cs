@@ -20,6 +20,11 @@ public class VioletWallJumpState : VioletState
         {
             stateMachine.ChangeState(violet.airState);
         }
+
+        if (violet.isGroundDetected())
+        {
+            stateMachine.ChangeState(violet.idleState);
+        }
     }
 
     public override void Exit()
