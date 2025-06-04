@@ -15,7 +15,7 @@ public class Mobs : MonoBehaviour
     protected bool isGrounded;
     protected bool isWallFound;
     
-    public int facingDirection { get; private set; } = 1;
+    public int facingDirection { get; protected set; } = 1;
     protected bool facingRight = true;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -60,7 +60,7 @@ public class Mobs : MonoBehaviour
         isWallFound = Physics2D.Raycast(wallCheck.position, Vector2.right, wallCheckDistance  * facingDirection, groundLayer);
     }
     
-    protected virtual void Flip()
+    public virtual void Flip()
     {
         facingDirection = -1 * facingDirection;
         facingRight = !facingRight;

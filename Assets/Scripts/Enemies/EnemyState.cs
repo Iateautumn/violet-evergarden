@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class EnemyState : MonoBehaviour
+public class EnemyState
 {
     protected EnemyStateMachine stateMachine;
     protected Enemy enemy;
@@ -11,25 +11,31 @@ public class EnemyState : MonoBehaviour
 
     protected float stateTimer;
     
+    // protected Rigidbody2D rb;
+    
     public EnemyState(Enemy _enemy, EnemyStateMachine _stateMachine, string _animBoolName)
     {
         this.stateMachine = _stateMachine;
         this.animBoolName = _animBoolName;
         this.enemy = _enemy;
     }
-
-    public void Update()
-    {
-        stateTimer -= Time.deltaTime;
-    }
-
+    
     public virtual void Enter()
     {
         triggerCalled = false;
+        enemy.anim.SetBool(animBoolName, true);
+    }
+    
+    public virtual void Update()
+    {
+        stateTimer -= Time.deltaTime;
     }
 
     public virtual void Exit()
     {
         // triggerCalled = false;
+        enemy.anim.SetBool(animBoolName, false);
     }
+    
+    
 }
