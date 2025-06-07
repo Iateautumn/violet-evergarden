@@ -14,7 +14,8 @@ public class VioletAirAttackState : VioletState
     public override void Update()
     {
         base.Update();
-        if (triggerCalled)
+        longJump();
+        if (triggerCalled && rb.linearVelocity.y <= 0)
         {
             // if (rb.linearVelocity.y >= 0)
             // {
@@ -22,10 +23,28 @@ public class VioletAirAttackState : VioletState
             // }
             // else
             stateMachine.ChangeState(violet.airState);
+            return;
             // }
         }
+        else if (triggerCalled && rb.linearVelocity.y > 0)
+        {
+            stateMachine.ChangeState(violet.jumpState);
+            return;
+        }
     }
-
+    public void longJump()
+    {
+        if (!violet.isJumpRelease)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, violet.longJumpSpeed);
+        }
+        if (!violet.isJumpRelease && (Input.GetKeyUp(KeyCode.Space) || violet.jumpTimer < 0))
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 2);
+            violet.isJumpRelease = true;
+        }
+        violet.jumpTimer -= Time.deltaTime;
+    }
     public override void Exit()
     {
         base.Exit();

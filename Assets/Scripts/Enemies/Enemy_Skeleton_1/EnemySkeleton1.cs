@@ -8,7 +8,13 @@ public class EnemySkeleton1 : Enemy
     public Skeleton1IdleState idleState { get;private set; }
     public Skeleton1MoveState moveState { get;private set; }
     public Skeleton1BattleState battleState { get;private set; }
+    public Skeleton1AttackState attackState { get; private set; }
     #endregion
+
+    [Header("Attack Settings")] 
+    public float attackLength;
+
+    public float attackWidth;
     
 
 
@@ -23,8 +29,16 @@ public class EnemySkeleton1 : Enemy
         idleState = new Skeleton1IdleState(this, stateMachine, "Idle", this);
         moveState = new Skeleton1MoveState(this, stateMachine, "Move", this);
         battleState = new Skeleton1BattleState(this, stateMachine, "Move", this);
+        attackState = new Skeleton1AttackState(this, stateMachine, "Attack", this);
     }
 
+    protected override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(attackCheck.position, new Vector3(attackLength,attackWidth));
+    }
+    
     public override void Start()
     {
         base.Start();

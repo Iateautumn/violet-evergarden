@@ -10,21 +10,30 @@ public class Skeleton1BattleState : Skeleton1State
     public override void Enter()
     {
         base.Enter();
-
-
-
+        stateTimer = skeleton1.battleTime;
+        player = PlayerManager.instance.violet.transform;
     }
 
     public override void Update()
     {
       
         base.Update();
-        skeleton1.SetVelocity(skeleton1.moveSpeed * skeleton1.facingDirection * skeleton1.battleSpeedRate, skeleton1.rb.linearVelocity.y);
-        if (skeleton1.IsPlayerDetected().distance < skeleton1.attackDistance)
+        if (IsFlipNeed())
         {
-            Debug.Log("Attack");
+            skeleton1.Flip();
         }
-        if (!skeleton1.IsPlayerDetected())
+        skeleton1.SetVelocity(skeleton1.moveSpeed * skeleton1.facingDirection * skeleton1.battleSpeedRate, skeleton1.rb.linearVelocity.y);
+        if (skeleton1.IsPlayerDetected())
+        {
+            stateTimer = skeleton1.battleTime;
+            if (skeleton1.IsPlayerDetected().distance < skeleton1.attackDistance)
+            {
+                if (CanAttack())
+                    stateMachine.ChangeState(skeleton1.attackState);
+            }
+        }
+
+        if (stateTimer < 0)
         {
             stateMachine.ChangeState(skeleton1.idleState);
         }
@@ -34,4 +43,23 @@ public class Skeleton1BattleState : Skeleton1State
     {
         base.Exit();
     }
+
+    private bool IsFlipNeed()
+    {
+        if ((player.transform.position.x - skeleton1.rb.position.x) * skeleton1.facingDirection < 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private bool CanAttack()
+    {
+        if (Time.time >= skeleton1.attackCoolDown + skeleton1.lastAttackTime)
+        {
+            return true;
+        }
+        return false;
+    }
+    
 }

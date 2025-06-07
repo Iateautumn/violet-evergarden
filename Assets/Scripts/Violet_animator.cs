@@ -2,16 +2,16 @@ using UnityEngine;
 
 public class Violet_animator : MonoBehaviour
 {
-    private Player player;
+    private Violet violet;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        player = GetComponentInParent<Player>(); 
+        violet = GetComponentInParent<Violet>(); 
     }
 
     // Update is called once per frame
     private void AnimationTrigger()
     {
-        player.AttackOver();
+        violet.AttackOver();
     }
 }

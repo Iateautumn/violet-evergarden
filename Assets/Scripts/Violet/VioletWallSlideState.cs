@@ -20,7 +20,7 @@ public class VioletWallSlideState : VioletState
             return;
         }
         
-        if (xInput != 0 && violet.facingDirection != xInput)
+        if (xInput != 0 && violet.facingDirection != xInput || ! violet.isWallDetected())
         {
             stateMachine.ChangeState(violet.idleState);
         }

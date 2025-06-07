@@ -31,6 +31,8 @@ public class VioletGroundedState : VioletState
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            violet.isJumpRelease = false;
+            violet.jumpTimer = violet.jumpTimeThreshold;
             violet.stateMachine.ChangeState(violet.jumpState);
         }
     }

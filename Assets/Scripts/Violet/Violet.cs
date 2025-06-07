@@ -14,6 +14,7 @@ public class Violet : Mobs
     public VioletWallJumpState wallJumpState { get;private set; }
     public VioletPrimaryAttackState primaryAttackState { get;private set; }
     public VioletAirAttackState airAttackState { get; private set; }
+    public VioletWallJump2State wallJump2State { get;private set; }
     
     [SerializeField] private float horizonSpeed;
 
@@ -27,10 +28,8 @@ public class Violet : Mobs
 
     [Header("dash")] 
     [SerializeField] public float dashDuration { get; private set; } = 0.20f;
-
-    [SerializeField] public float dashTimer { get; private set; } = 0;
     [SerializeField] public float dashSpeed { get; private set; } = 35f;
-    [SerializeField] public float dashCoolDownTime { get; private set; } = 0.6f;
+
 
     // [SerializeField] private bool dashCoolDown;
     
@@ -38,12 +37,19 @@ public class Violet : Mobs
     [Header("Long Jump Settings")]
     [SerializeField] private float minJumpHeight = 1.5f;   // 短跳最小高度
     [SerializeField] private float maxJumpHeight = 3f;     // 长跳最大高度
-    [SerializeField] private float jumpTimeThreshold; // 长按时间阈值
-    [SerializeField] public float longJumpSpeed { get;private set; }
+    [SerializeField] public float jumpTimeThreshold = 0.5f; // 长按时间阈值
+    public bool isJumpRelease = true;
+    public float jumpTimer;
+    public float floatingSpeed { get; private set; } = 13f;
+    public float longJumpSpeed { get; private set; } = 17f;
+    public float fallDownSpeed { get; private set; } = 11f;
     private float longJumpRate;
-    private float jumpStartTime;  // 记录跳跃开始时间
+    public float jumpStartTime;  // 记录跳跃开始时间
     private bool isPressingJumping;       // 标记是否正在跳跃
     private bool jumpKeyHeld;     // 标记跳跃键是否被按住
+    public float wallJumpSpeed { get; private set; } = 17f;
+    public float wallJumpTotalTimeThreshold { get; private set; } = 0.35f;
+    public float wallJump1TimeThreshold { get; private set; } = 0.15f;
 
     [Header("Attack Settings")]
     [SerializeField] public float attackCoolDownTime { get; private set; } = 0.4f;
@@ -69,6 +75,7 @@ public class Violet : Mobs
         wallJumpState = new VioletWallJumpState(stateMachine, this, "Jump");
         primaryAttackState = new VioletPrimaryAttackState(stateMachine, this, "Attack");
         airAttackState = new VioletAirAttackState(stateMachine, this, "Attack");
+        wallJump2State = new VioletWallJump2State(stateMachine, this, "WallJump2");
         
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -81,7 +88,8 @@ public class Violet : Mobs
         horizonSpeed = 5f;
         jumpSpeed = 7;
         longJumpSpeed = 14;
-        jumpTimeThreshold = 0.3f;
+        fallDownSpeed = 11;
+        jumpTimeThreshold = 0.4f;
         // facingDirection = 1;
         longJumpRate = (float)0.025;
         facingRight = true;
@@ -171,26 +179,25 @@ public class Violet : Mobs
     }
     private void DashCheck()
     {
-        dashTimer -= Time.deltaTime;
         
-        if (Input.GetKey(KeyCode.F) && dashTimer <= 0)
+        if (Input.GetKey(KeyCode.F) && SkillManager.instance.dashSkill.CanUseSkill())
         {
             stateMachine.ChangeState(dashState);
-            dashTimer = dashCoolDownTime;
+            // dashTimer = dashCoolDownTime;
         }
     }
     
-    private void Movement()
-    {
-        if (dashTimer > 0)
-        {
-            rb.linearVelocity = new Vector2(facingDirection * dashSpeed, 0);
-        }
-        else
-        {
-            rb.linearVelocity = new Vector2(xInput * horizonSpeed, rb.linearVelocity.y);
-        }
-    }
+    // private void Movement()
+    // {
+    //     if (dashTimer > 0)
+    //     {
+    //         rb.linearVelocity = new Vector2(facingDirection * dashSpeed, 0);
+    //     }
+    //     else
+    //     {
+    //         rb.linearVelocity = new Vector2(xInput * horizonSpeed, rb.linearVelocity.y);
+    //     }
+    // }
 
     private void Jump()
     {
@@ -205,15 +212,15 @@ public class Violet : Mobs
         }
     }
 
-    private void AnimatorController()
-    {
-        isMoving = rb.linearVelocity.x != 0;
-        anim.SetBool("isMoving", isMoving);
-        anim.SetBool("isGrounded", isGrounded);
-        anim.SetBool("isDashing", dashTimer > 0);
-        anim.SetBool("isAttacking", isAttacking);
-        anim.SetInteger("comboCounter", comboCounter);
-    }
+    // private void AnimatorController()
+    // {
+    //     isMoving = rb.linearVelocity.x != 0;
+    //     anim.SetBool("isMoving", isMoving);
+    //     anim.SetBool("isGrounded", isGrounded);
+    //     anim.SetBool("isDashing", dashTimer > 0);
+    //     anim.SetBool("isAttacking", isAttacking);
+    //     anim.SetInteger("comboCounter", comboCounter);
+    // }
 
     public override void SetVelocity(float _XVelocity, float _YVelocity)
     {
@@ -258,6 +265,26 @@ public class Violet : Mobs
         comboTimeWindow = comboTime;
     }
 
+    protected override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+        Gizmos.DrawWireSphere(attackCheck.position, attackCheckRadius);
+    }
+
+    // public float jumpSpeedFunc(float time)
+    // {
+    //     
+    // }
+
     public void AnimEndTrigger() => stateMachine.currentState.AnimFinishTrigger();
 
+    // public override void Damage()
+    // {
+    //     base.Damage();
+    //     StartCoroutine("HitKnockback");
+    //
+    // }
+    
+
+    
 }

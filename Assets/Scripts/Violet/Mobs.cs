@@ -1,9 +1,12 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class Mobs : MonoBehaviour
 {
     public Rigidbody2D rb; //{ get; private set; }
     public Animator anim; //{ get; private set; }
+    public MobsFlash mf;
     
     [Header("Collision Check")]
     [SerializeField] protected float groundCheckDistance;
@@ -11,6 +14,14 @@ public class Mobs : MonoBehaviour
     [SerializeField] protected Transform wallCheck;
     [SerializeField] protected float wallCheckDistance;
     [SerializeField] protected LayerMask groundLayer;
+    
+    [Header("Knockback Settings")]
+    [SerializeField] protected Vector2 knockbackDirection;
+    [SerializeField] protected float knockbackDuration;
+    protected bool isKnocked;
+
+    public Transform attackCheck;
+    public float attackCheckRadius;
     
     protected bool isGrounded;
     protected bool isWallFound;
@@ -28,6 +39,7 @@ public class Mobs : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
+        mf = GetComponent<MobsFlash>();
         //
         //
         // Debug.Log(anim.name);
@@ -69,6 +81,26 @@ public class Mobs : MonoBehaviour
 
     public virtual void SetVelocity(float _XVelocity, float _YVelocity)
     {
+        if (isKnocked)
+            return;
         rb.linearVelocity = new Vector2(_XVelocity, _YVelocity);
+    }
+
+    public virtual void Damage(float dir)
+    {
+        mf.StartCoroutine("HitFlash");
+        StartCoroutine("HitKnockback",dir);
+    }
+
+    protected virtual IEnumerator HitKnockback(float hitDir)
+    {
+        isKnocked = true;
+        
+        rb.linearVelocity = new Vector2(knockbackDirection.x * hitDir, knockbackDirection.y);
+        
+        yield return new WaitForSeconds(knockbackDuration); 
+        
+        isKnocked = false;
+        
     }
 }

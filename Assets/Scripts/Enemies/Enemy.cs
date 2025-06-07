@@ -12,10 +12,13 @@ public class Enemy : Mobs
     
     #region Battle
     [Header("Collision Check")]
-    [SerializeField] Transform attackCheck;
+    [SerializeField] Transform attackDistanceCheck;
     [SerializeField] public float detectRange = 50;
     [SerializeField] public float attackDistance = 10f;
+    public float attackCoolDown = 0.1f;
+    [HideInInspector] public float lastAttackTime;
     public float battleSpeedRate { get; private set; } = 1.2f;
+    public float battleTime { get; private set; } = 3f;
     
     #endregion
     
@@ -41,6 +44,7 @@ public class Enemy : Mobs
         base.Update();
         stateMachine.currentState.Update();
     }
+    
 
     protected override void OnDrawGizmos()
     {
@@ -48,6 +52,6 @@ public class Enemy : Mobs
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, new Vector3(transform.position.x + attackDistance * facingDirection, transform.position.y));
     }
-
+    public virtual void AnimEndTrigger() => stateMachine.currentState.AnimFinishTrigger();
     public virtual RaycastHit2D IsPlayerDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDirection, detectRange, playerLayer);
 }

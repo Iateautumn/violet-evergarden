@@ -24,10 +24,10 @@ public class VioletAirState : VioletState
         {
             violet.stateMachine.ChangeState(violet.wallSlideState);
         }
-        if (xInput != 0)
-        {
-            violet.SetVelocity(xInput * violet.moveSpeed, rb.linearVelocity.y);
-        }
+        // if (xInput != 0)
+        // {
+        violet.SetVelocity(xInput * violet.moveSpeed, - violet.fallDownSpeed);
+        // }
         if (violet.isGroundDetected())
         {
             violet.stateMachine.ChangeState(violet.idleState);
