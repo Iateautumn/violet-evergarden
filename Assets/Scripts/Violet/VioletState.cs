@@ -32,6 +32,7 @@ public class VioletState
         stateTimer -= Time.deltaTime;
         CheckInput();
         violet.anim.SetFloat("YVelocity", rb.linearVelocity.y);
+        CheckFireball();
     }
 
     public virtual void Exit()
@@ -67,6 +68,14 @@ public class VioletState
         // }
     }
 
+    public virtual void CheckFireball()
+    {
+        if (Input.GetKeyDown(KeyCode.K) && SkillManager.instance.fireballSkill.CanUseSkill())
+        {
+            SkillManager.instance.fireballSkill.UseSkill();
+            stateMachine.ChangeState(PlayerManager.instance.violet.fireballState);
+        }
+    }
     public virtual void AnimFinishTrigger()
     {
         triggerCalled = true;

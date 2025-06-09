@@ -22,16 +22,15 @@ public class VioletAnimTrigger : MonoBehaviour
         }
     }
 
-    private void FireBallTrigger()
+    private void CreateFireball()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(violet.attackCheck.position, violet.attackCheckRadius);
-        foreach (var hit in colliders)
-        {
-            if (hit.GetComponent<Enemy>() != null)
-            {
-                hit.GetComponent<Enemy>().Damage(violet.facingDirection);
-            }
-        }
+        SkillManager.instance.fireballSkill.CreateFireball();
     }
+
+    private void RecoverTrigger()
+    {
+        Debug.Log("healing");
+    }
+
     
 }

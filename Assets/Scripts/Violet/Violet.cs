@@ -15,7 +15,9 @@ public class Violet : Mobs
     public VioletPrimaryAttackState primaryAttackState { get;private set; }
     public VioletAirAttackState airAttackState { get; private set; }
     public VioletWallJump2State wallJump2State { get;private set; }
+    public VioletFireballState fireballState { get;private set; }
     
+    public VIoletRecoverState recoverState { get;private set; }
     [SerializeField] private float horizonSpeed;
 
 
@@ -76,6 +78,8 @@ public class Violet : Mobs
         primaryAttackState = new VioletPrimaryAttackState(stateMachine, this, "Attack");
         airAttackState = new VioletAirAttackState(stateMachine, this, "Attack");
         wallJump2State = new VioletWallJump2State(stateMachine, this, "WallJump2");
+        fireballState = new VioletFireballState(stateMachine, this, "Fireball");
+        recoverState = new VIoletRecoverState(stateMachine, this, "Recover");
         
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -182,6 +186,7 @@ public class Violet : Mobs
         
         if (Input.GetKey(KeyCode.F) && SkillManager.instance.dashSkill.CanUseSkill())
         {
+            SkillManager.instance.dashSkill.UseSkill();
             stateMachine.ChangeState(dashState);
             // dashTimer = dashCoolDownTime;
         }

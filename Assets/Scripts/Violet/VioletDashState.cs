@@ -22,6 +22,11 @@ public class VioletDashState : VioletState
         }
     }
 
+    public override void CheckFireball()
+    {
+        return;
+    }
+
     public override void Exit()
     {
         base.Exit();

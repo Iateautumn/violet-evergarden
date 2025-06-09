@@ -5,6 +5,7 @@ public class SkillManager : MonoBehaviour
     public static SkillManager instance;
     
     public DashSkill dashSkill;
+    public FireballSkill fireballSkill;
 
     private void Awake()
     {
@@ -21,5 +22,6 @@ public class SkillManager : MonoBehaviour
     private void Start()
     {
         dashSkill = GetComponent<DashSkill>();
+        fireballSkill = GetComponent<FireballSkill>();
     }
 }

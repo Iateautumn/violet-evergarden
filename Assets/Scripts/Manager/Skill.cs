@@ -5,7 +5,12 @@ public class Skill : MonoBehaviour
 
     [SerializeField] protected float cooldownTime;
     protected float cooldownTimer;
+    protected Violet violet;
 
+    protected virtual void Start()
+    {
+        violet = PlayerManager.instance.violet;
+    }
     protected virtual void Update()
     {
         cooldownTimer -= Time.deltaTime;
@@ -15,8 +20,6 @@ public class Skill : MonoBehaviour
     {
         if (cooldownTimer <= 0)
         {
-            UseSkill();
-            cooldownTimer = cooldownTime;
             return true;
         }
         return false;
@@ -24,7 +27,7 @@ public class Skill : MonoBehaviour
 
     public virtual void UseSkill()
     {
-        
+        cooldownTimer = cooldownTime;
     }
     
 }

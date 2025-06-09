@@ -26,6 +26,7 @@ public class VioletGroundedState : VioletState
             {
                 stateMachine.ChangeState(violet.primaryAttackState);
                 violet.attackTimer = violet.attackCoolDownTime;
+                return;
             }
             
         }
@@ -34,6 +35,13 @@ public class VioletGroundedState : VioletState
             violet.isJumpRelease = false;
             violet.jumpTimer = violet.jumpTimeThreshold;
             violet.stateMachine.ChangeState(violet.jumpState);
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            violet.stateMachine.ChangeState(violet.recoverState);
+            return;
         }
     }
 

@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: VIolet_fireball
+  m_Name: Fireball
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,25 +21,21 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 21300000, guid: dda2dcca7a9bd59409445b12d3db76ab, type: 3}
+      value: {fileID: 21300000, guid: 5ccf9ded3c3f3d049ae122f8aff9f3e4, type: 3}
+    - time: 0.0125
+      value: {fileID: 21300000, guid: d0bd7f1a6873d294f8df9b7e3a66cbd5, type: 3}
+    - time: 0.025
+      value: {fileID: 21300000, guid: 14ee27bc9c223c34da9b140fb9edcb6e, type: 3}
+    - time: 0.0375
+      value: {fileID: 21300000, guid: 45037ec41a986ed4dafb173be0158abc, type: 3}
     - time: 0.05
-      value: {fileID: 21300000, guid: ea91e804a7305734690737fa3a9dcd3e, type: 3}
-    - time: 0.1
-      value: {fileID: 21300000, guid: a444cd810f61f9d4a81c84862b0622c3, type: 3}
-    - time: 0.15
-      value: {fileID: 21300000, guid: ecf4d1c725f78004fbe18d1dd531ca22, type: 3}
-    - time: 0.2
-      value: {fileID: 21300000, guid: e5d2b7a9da561e34da3c8c90c9a1cbac, type: 3}
-    - time: 0.25
-      value: {fileID: 21300000, guid: 5504d594cd5cb794bbdf4b3d297f09bd, type: 3}
-    - time: 0.3
-      value: {fileID: 21300000, guid: c76949e69f336aa45816390651c40407, type: 3}
+      value: {fileID: 21300000, guid: ba0f9c69c91b0634cae3b81e6f3666a1, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
     flags: 2
-  m_SampleRate: 20
+  m_SampleRate: 80
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -56,19 +52,17 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 21300000, guid: dda2dcca7a9bd59409445b12d3db76ab, type: 3}
-    - {fileID: 21300000, guid: ea91e804a7305734690737fa3a9dcd3e, type: 3}
-    - {fileID: 21300000, guid: a444cd810f61f9d4a81c84862b0622c3, type: 3}
-    - {fileID: 21300000, guid: ecf4d1c725f78004fbe18d1dd531ca22, type: 3}
-    - {fileID: 21300000, guid: e5d2b7a9da561e34da3c8c90c9a1cbac, type: 3}
-    - {fileID: 21300000, guid: 5504d594cd5cb794bbdf4b3d297f09bd, type: 3}
-    - {fileID: 21300000, guid: c76949e69f336aa45816390651c40407, type: 3}
+    - {fileID: 21300000, guid: 5ccf9ded3c3f3d049ae122f8aff9f3e4, type: 3}
+    - {fileID: 21300000, guid: d0bd7f1a6873d294f8df9b7e3a66cbd5, type: 3}
+    - {fileID: 21300000, guid: 14ee27bc9c223c34da9b140fb9edcb6e, type: 3}
+    - {fileID: 21300000, guid: 45037ec41a986ed4dafb173be0158abc, type: 3}
+    - {fileID: 21300000, guid: ba0f9c69c91b0634cae3b81e6f3666a1, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.35000002
+    m_StopTime: 0.0625
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -88,15 +82,8 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.2
-    functionName: CreateFireball
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.35
-    functionName: AnimTrigger
+  - time: 0
+    functionName: FireBallTrigger
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
