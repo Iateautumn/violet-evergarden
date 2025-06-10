@@ -17,15 +17,61 @@ AnimationClip:
   m_PositionCurves: []
   m_ScaleCurves: []
   m_FloatCurves: []
-  m_PPtrCurves: []
-  m_SampleRate: 60
+  m_PPtrCurves:
+  - serializedVersion: 2
+    curve:
+    - time: 0
+      value: {fileID: 21300000, guid: 67f071b1586c6014886fa9a8d428586e, type: 3}
+    - time: 0.1
+      value: {fileID: 21300000, guid: 09125434118e3bf48bd5dee49e40e599, type: 3}
+    - time: 0.2
+      value: {fileID: 21300000, guid: c797a5b60d5cb9446bb5b282643ccf00, type: 3}
+    - time: 0.3
+      value: {fileID: 21300000, guid: 340c23d9557e6f44daf1c0097b9920c0, type: 3}
+    - time: 0.4
+      value: {fileID: 21300000, guid: 15d29c9111d908149a13f6bee4887bd2, type: 3}
+    - time: 0.5
+      value: {fileID: 21300000, guid: e03a5e4672ca6a443bd3cc96a1e66fea, type: 3}
+    - time: 0.6
+      value: {fileID: 21300000, guid: 3b2b1188f3f87b64cb74a1196dac210d, type: 3}
+    - time: 0.7
+      value: {fileID: 21300000, guid: c8193a8b1c2bfda47b7125958240eeab, type: 3}
+    - time: 0.8
+      value: {fileID: 21300000, guid: 366d241187805324abc57efe799f9032, type: 3}
+    - time: 0.9
+      value: {fileID: 21300000, guid: 078f4fc38cb966a4aba51372cfe45c11, type: 3}
+    attribute: m_Sprite
+    path: 
+    classID: 212
+    script: {fileID: 0}
+    flags: 2
+  m_SampleRate: 10
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   m_ClipBindingConstant:
-    genericBindings: []
-    pptrCurveMapping: []
+    genericBindings:
+    - serializedVersion: 2
+      path: 0
+      attribute: 0
+      script: {fileID: 0}
+      typeID: 212
+      customType: 23
+      isPPtrCurve: 1
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
+    pptrCurveMapping:
+    - {fileID: 21300000, guid: 67f071b1586c6014886fa9a8d428586e, type: 3}
+    - {fileID: 21300000, guid: 09125434118e3bf48bd5dee49e40e599, type: 3}
+    - {fileID: 21300000, guid: c797a5b60d5cb9446bb5b282643ccf00, type: 3}
+    - {fileID: 21300000, guid: 340c23d9557e6f44daf1c0097b9920c0, type: 3}
+    - {fileID: 21300000, guid: 15d29c9111d908149a13f6bee4887bd2, type: 3}
+    - {fileID: 21300000, guid: e03a5e4672ca6a443bd3cc96a1e66fea, type: 3}
+    - {fileID: 21300000, guid: 3b2b1188f3f87b64cb74a1196dac210d, type: 3}
+    - {fileID: 21300000, guid: c8193a8b1c2bfda47b7125958240eeab, type: 3}
+    - {fileID: 21300000, guid: 366d241187805324abc57efe799f9032, type: 3}
+    - {fileID: 21300000, guid: 078f4fc38cb966a4aba51372cfe45c11, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
@@ -50,4 +96,18 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.7
+    functionName: RecoverTrigger
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1
+    functionName: AnimTrigger
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

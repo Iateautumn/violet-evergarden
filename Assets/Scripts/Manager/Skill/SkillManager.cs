@@ -6,6 +6,9 @@ public class SkillManager : MonoBehaviour
     
     public DashSkill dashSkill;
     public FireballSkill fireballSkill;
+    public GetDamagedSkill getDamagedSkill;
+    public RecoverSkill recoverSkill;
+
 
     private void Awake()
     {
@@ -23,5 +26,7 @@ public class SkillManager : MonoBehaviour
     {
         dashSkill = GetComponent<DashSkill>();
         fireballSkill = GetComponent<FireballSkill>();
+        getDamagedSkill = GetComponent<GetDamagedSkill>();
+        recoverSkill = GetComponent<RecoverSkill>();
     }
 }

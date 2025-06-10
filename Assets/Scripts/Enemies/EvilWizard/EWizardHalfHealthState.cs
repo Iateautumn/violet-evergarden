@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class EWzardHalfHealthState : EWizardState
+public class EWizardHalfHealthState : EWizardState
 {
-    public EWzardHalfHealthState(Enemy _enemy, EnemyStateMachine _stateMachine, string _animBoolName, EWizard _eWizard) : base(_enemy, _stateMachine, _animBoolName, _eWizard)
+    public EWizardHalfHealthState(Enemy _enemy, EnemyStateMachine _stateMachine, string _animBoolName, EWizard _eWizard) : base(_enemy, _stateMachine, _animBoolName, _eWizard)
     {
     }
 
@@ -14,6 +14,16 @@ public class EWzardHalfHealthState : EWizardState
     public override void Update()
     {
         base.Update();
+        if (Random.Range(0, 3) == 1)
+        {
+            stateMachine.ChangeState(eWizard.teleportAboveState);
+            return;
+        }
+        else
+        {
+            stateMachine.ChangeState(eWizard.teleportState);
+            return;
+        }
     }
 
     public override void Exit()

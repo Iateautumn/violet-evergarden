@@ -33,7 +33,7 @@ public class VioletWallJump2State : VioletState
             else if (Input.GetKey(KeyCode.D) && violet.facingDirection == 1)
             {
                 violet.SetVelocity(0.6f * violet.wallJumpSpeed * violet.facingDirection, 0.8f * violet.wallJumpSpeed);
-                Debug.Log(rb.linearVelocity.y);
+
             }
             else
             {

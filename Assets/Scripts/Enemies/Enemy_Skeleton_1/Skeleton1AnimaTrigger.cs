@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Skeleton1AnimaTrigger : MonoBehaviour
 {
-    private EnemySkeleton1 skeleton1 => GetComponentInParent<EnemySkeleton1>();
+    private Skeleton1 skeleton1 => GetComponentInParent<Skeleton1>();
 
     private void AnimTrigger()
     {
@@ -16,7 +16,8 @@ public class Skeleton1AnimaTrigger : MonoBehaviour
         {
             if (hit.GetComponent<Violet>() != null)
             {
-                hit.GetComponent<Violet>().Damage(skeleton1.facingDirection);
+                VioletStats target = hit.GetComponent<VioletStats>();
+                GetComponentInParent<EnemyStats>().DoDamage(target, skeleton1.facingDirection);
             }
         }
     }

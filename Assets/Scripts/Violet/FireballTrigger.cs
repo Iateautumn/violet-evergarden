@@ -11,7 +11,8 @@ public class FireballTrigger : MonoBehaviour
         {
             if (hit.GetComponent<Enemy>() != null)
             {
-                hit.GetComponent<Enemy>().Damage(PlayerManager.instance.violet.facingDirection);
+                EnemyStats target = hit.GetComponent<EnemyStats>();
+                target.TakeDamage(SkillManager.instance.fireballSkill.damage, PlayerManager.instance.violet.facingDirection);
             }
         }
     }

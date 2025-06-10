@@ -6,7 +6,7 @@ public class FireballController : Controller
     private Vector2 velocity;
     public void SetupFireball(Vector2 dir)
     {
-        Debug.Log(rb.linearVelocity);
+
         rb.linearVelocity = dir;
         velocity = dir;
         if (rb.linearVelocity.x < 0) 

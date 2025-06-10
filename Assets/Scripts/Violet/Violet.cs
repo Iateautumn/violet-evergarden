@@ -17,7 +17,8 @@ public class Violet : Mobs
     public VioletWallJump2State wallJump2State { get;private set; }
     public VioletFireballState fireballState { get;private set; }
     
-    public VIoletRecoverState recoverState { get;private set; }
+    public VioletRecoverState recoverState { get;private set; }
+    public VioletDeadState deadState { get;private set; }
     [SerializeField] private float horizonSpeed;
 
 
@@ -61,7 +62,8 @@ public class Violet : Mobs
     private bool isAttacking;
     private int comboCounter;
     
-
+    public VioletStats violetStats { get; private set; }
+    
     public override void Awake()
     {
         
@@ -79,7 +81,9 @@ public class Violet : Mobs
         airAttackState = new VioletAirAttackState(stateMachine, this, "Attack");
         wallJump2State = new VioletWallJump2State(stateMachine, this, "WallJump2");
         fireballState = new VioletFireballState(stateMachine, this, "Fireball");
-        recoverState = new VIoletRecoverState(stateMachine, this, "Recover");
+        recoverState = new VioletRecoverState(stateMachine, this, "Recover");
+        deadState = new VioletDeadState(stateMachine, this, "Dead");
+        
         
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -87,6 +91,8 @@ public class Violet : Mobs
     {
 
         base.Start();
+        violetStats = GetComponent<VioletStats>();
+        
         stateMachine.Initialize(idleState);
         
         horizonSpeed = 5f;
@@ -289,7 +295,11 @@ public class Violet : Mobs
     //     StartCoroutine("HitKnockback");
     //
     // }
-    
 
-    
+    public override void Die()
+    {
+        base.Die();
+        stateMachine.ChangeState(deadState);
+        
+    }
 }

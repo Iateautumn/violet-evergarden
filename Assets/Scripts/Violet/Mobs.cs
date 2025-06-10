@@ -7,6 +7,7 @@ public class Mobs : MonoBehaviour
     public Rigidbody2D rb; //{ get; private set; }
     public Animator anim; //{ get; private set; }
     public MobsFlash mf;
+    public CharStats charStats { get;private set; }
     
     [Header("Collision Check")]
     [SerializeField] protected float groundCheckDistance;
@@ -40,10 +41,11 @@ public class Mobs : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
         mf = GetComponent<MobsFlash>();
+        charStats = GetComponent<CharStats>();
         //
         //
         // Debug.Log(anim.name);
-        
+
 
         // if (wallCheck == null)
         // {
@@ -101,6 +103,11 @@ public class Mobs : MonoBehaviour
         yield return new WaitForSeconds(knockbackDuration); 
         
         isKnocked = false;
+        
+    }
+
+    public virtual void Die()
+    {
         
     }
 }

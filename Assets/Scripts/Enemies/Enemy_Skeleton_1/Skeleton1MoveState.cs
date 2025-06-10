@@ -4,7 +4,7 @@ public class Skeleton1MoveState : Skeleton1GroundState
 {
 
 
-    public Skeleton1MoveState(Enemy _enemy, EnemyStateMachine _stateMachine, string _animBoolName, EnemySkeleton1 _skeleton1) : base(_enemy, _stateMachine, _animBoolName, _skeleton1)
+    public Skeleton1MoveState(Enemy _enemy, EnemyStateMachine _stateMachine, string _animBoolName, Skeleton1 _skeleton1) : base(_enemy, _stateMachine, _animBoolName, _skeleton1)
     {
 
     }

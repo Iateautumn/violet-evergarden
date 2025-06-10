@@ -32,4 +32,13 @@ public class EWizardState : EnemyState
             stateMachine.ChangeState(eWizard.idleState);
         }
     }
+
+    protected virtual void IsFlipNeed()
+    {
+        if ((violet.transform.position.x - eWizard.transform.position.x) * eWizard.facingDirection < 0)
+        {
+            eWizard.Flip();
+        }
+    }
+    
 }

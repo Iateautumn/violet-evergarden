@@ -14,7 +14,8 @@ public class EWizardMoveState : EWizardState
     public override void Update()
     {
         base.Update();
-        if (eWizard.health < eWizard.maxHealth / 2f)
+        IsFlipNeed();
+        if (eWizard.charStats.GetCurrentHealth() < eWizard.charStats.maxHealth.GetValue() / 2f)
         {
             stateMachine.ChangeState(eWizard.halfHealthState);
             return;
@@ -23,6 +24,21 @@ public class EWizardMoveState : EWizardState
         if (violet.transform.position.x < eWizard.transform.position.x)
         {
             eWizard.SetVelocity(- eWizard.moveSpeed, 0);
+        }
+        else
+        {
+            eWizard.SetVelocity(eWizard.moveSpeed, 0);
+        }
+
+
+        if (violet.transform.position.x > eWizard.transform.position.x - eWizard.attackCheckRadius && eWizard.facingDirection == -1)
+        {
+            stateMachine.ChangeState(eWizard.prepareState);
+            return;
+        }else if (eWizard.transform.position.x + eWizard.attackCheckRadius > violet.transform.position.x && eWizard.facingDirection == 1)
+        {
+            stateMachine.ChangeState(eWizard.prepareState);
+            return;
         }
     }
 

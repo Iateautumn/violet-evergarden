@@ -24,8 +24,9 @@ public class Enemy : Mobs
     
     #region Move
     [Header("Move Settings")] 
-    public float moveSpeed;
-    public float idleTime;
+    [SerializeField] public float idleTime;
+    [SerializeField] public float moveSpeed;
+    
     #endregion
 
     public override void Awake()

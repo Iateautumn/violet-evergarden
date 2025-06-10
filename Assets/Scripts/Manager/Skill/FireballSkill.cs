@@ -10,6 +10,8 @@ public class FireballSkill : Skill
     [SerializeField] public float lifeTime = 2f;
     [SerializeField] public float attackRadius;
     [SerializeField] public float attackWidth;
+    [SerializeField] public int damage;
+    [SerializeField] public int manaCost;
     protected override void Start()
     {
         base.Start();
@@ -28,7 +30,7 @@ public class FireballSkill : Skill
         GameObject fireball = Instantiate(fireballTemplate, violet.transform.position, transform.rotation);
         FireballController fireballController = fireball.GetComponent<FireballController>();
         fireballVector = new Vector2(fireballSpeed * violet.facingDirection, 0);
-        Debug.Log(fireballVector);
+
         fireballController.SetupFireball(fireballVector);
         Destroy(fireball, lifeTime);
         

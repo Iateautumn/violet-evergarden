@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemySkeleton1 : Enemy
+public class Skeleton1 : Enemy
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     #region States
@@ -9,6 +9,7 @@ public class EnemySkeleton1 : Enemy
     public Skeleton1MoveState moveState { get;private set; }
     public Skeleton1BattleState battleState { get;private set; }
     public Skeleton1AttackState attackState { get; private set; }
+    public Skeleton1DeadState deadState { get; private set; }
     #endregion
 
     [Header("Attack Settings")] 
@@ -30,6 +31,7 @@ public class EnemySkeleton1 : Enemy
         moveState = new Skeleton1MoveState(this, stateMachine, "Move", this);
         battleState = new Skeleton1BattleState(this, stateMachine, "Move", this);
         attackState = new Skeleton1AttackState(this, stateMachine, "Attack", this);
+        deadState = new Skeleton1DeadState(this,stateMachine, "Dead", this);
     }
 
     protected override void OnDrawGizmos()
@@ -48,5 +50,11 @@ public class EnemySkeleton1 : Enemy
     protected override void Update()
     {
         base.Update();
+    }
+
+    public override void Die()
+    {
+        base.Die();
+        stateMachine.ChangeState(deadState);
     }
 }

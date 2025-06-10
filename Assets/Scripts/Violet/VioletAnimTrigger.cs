@@ -17,19 +17,29 @@ public class VioletAnimTrigger : MonoBehaviour
         {
             if (hit.GetComponent<Enemy>() != null)
             {
-                hit.GetComponent<Enemy>().Damage(violet.facingDirection);
+                EnemyStats target = hit.GetComponent<EnemyStats>();
+                violet.violetStats.DoDamage(target,violet.facingDirection);
             }
         }
     }
 
     private void CreateFireball()
     {
-        SkillManager.instance.fireballSkill.CreateFireball();
+        if (violet.violetStats.IsManaEnough(SkillManager.instance.fireballSkill.manaCost))
+        {
+            violet.violetStats.IncreaseMana(- SkillManager.instance.fireballSkill.manaCost);
+            SkillManager.instance.fireballSkill.CreateFireball();
+        }
     }
 
     private void RecoverTrigger()
     {
-        Debug.Log("healing");
+        if (violet.violetStats.IsManaEnough(SkillManager.instance.recoverSkill.manaCost))
+        {
+            violet.violetStats.IncreaseMana(- SkillManager.instance.recoverSkill.manaCost);
+            violet.charStats.Recover(SkillManager.instance.recoverSkill.recoverHealth);
+        }
+
     }
 
     

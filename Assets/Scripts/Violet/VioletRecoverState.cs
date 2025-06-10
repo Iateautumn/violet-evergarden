@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class VIoletRecoverState : VioletState
+public class VioletRecoverState : VioletState
 {
-    public VIoletRecoverState(VioletStateMachine _stateMachine, Violet _violet, string _animBoolName) : base(_stateMachine, _violet, _animBoolName)
+    public VioletRecoverState(VioletStateMachine _stateMachine, Violet _violet, string _animBoolName) : base(_stateMachine, _violet, _animBoolName)
     {
     }
 

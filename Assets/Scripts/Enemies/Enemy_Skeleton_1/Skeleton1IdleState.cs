@@ -3,7 +3,7 @@ using UnityEngine;
 public class Skeleton1IdleState : Skeleton1GroundState
 
 {
-    public Skeleton1IdleState(Enemy _enemy, EnemyStateMachine _stateMachine, string _animBoolName, EnemySkeleton1 _skeleton1) : base(_enemy, _stateMachine, _animBoolName, _skeleton1)
+    public Skeleton1IdleState(Enemy _enemy, EnemyStateMachine _stateMachine, string _animBoolName, Skeleton1 _skeleton1) : base(_enemy, _stateMachine, _animBoolName, _skeleton1)
     {
     }
 

@@ -14,6 +14,7 @@ public class EWizardFireballState : EWizardState
     public override void Update()
     {
         base.Update();
+        eWizard.SetVelocity(0,0);
         ToIdleState();
     }
 
