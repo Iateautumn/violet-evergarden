@@ -43,34 +43,12 @@ public class VioletState
     private void CheckInput() 
     {
         xInput = Input.GetAxisRaw("Horizontal");
-
-        // 检测跳跃键按下
-        // if (Input.GetKeyDown(KeyCode.Space))
-        // {
-        //     jumpKeyHeld = true;
-        //     Jump();
-        // }
-        //
-        // // 检测跳跃键释放
-        // if (Input.GetKeyUp(KeyCode.Space))
-        // {
-        //     jumpKeyHeld = false;
-        // }
-        // dashTime -= Time.deltaTime;
-        // if (dashTime <  - dashCoolDownTime && Input.GetKeyDown(KeyCode.F))
-        // {
-        //     dashTime = dashDuration;
-        // }
-        //
-        // if (Input.GetKeyDown(KeyCode.J))
-        // {
-        //     StartAttackEvent();
-        // }
+        
     }
 
     public virtual void CheckFireball()
     {
-        if (Input.GetKeyDown(KeyCode.K) && SkillManager.instance.fireballSkill.CanUseSkill())
+        if (Input.GetKeyDown(KeyCode.K) && SkillManager.instance.fireballSkill.CanUseSkill() && violet.violetStats.GetCurrentHealth() > 0)
         {
             SkillManager.instance.fireballSkill.UseSkill();
             stateMachine.ChangeState(PlayerManager.instance.violet.fireballState);

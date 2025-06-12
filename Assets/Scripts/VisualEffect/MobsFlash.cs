@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-
+// when get hurt
 public class MobsFlash : MonoBehaviour
 {
 

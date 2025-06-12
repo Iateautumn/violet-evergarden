@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-
+// Encapsulating a state as a class provides strong extensibility
 [System.Serializable]
 public class Stat
 {

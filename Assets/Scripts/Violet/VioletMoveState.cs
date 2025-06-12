@@ -10,6 +10,7 @@ public class VioletMoveState : VioletGroundedState
     public override void Enter()
     {
         base.Enter();
+        PlayerManager.instance.violet.GetComponentInChildren<MobsSEF>().PlayLoopSound(MobsSEF.SoundType.Move);
     }
 
     public override void Update()
@@ -26,6 +27,7 @@ public class VioletMoveState : VioletGroundedState
 
     public override void Exit()
     {
+        PlayerManager.instance.violet.GetComponentInChildren<MobsSEF>().StopLoopSound();
         base.Exit();
     }
 }

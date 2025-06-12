@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerManager : MonoBehaviour, SaveManagerInterface
 {
     
     public static PlayerManager instance;
@@ -14,5 +14,16 @@ public class PlayerManager : MonoBehaviour
         {
             instance = this;
         }
+
+    }
+
+    public void LoadData(GameData data)
+    {
+        Debug.Log(data.a);
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.a = 1;
     }
 }

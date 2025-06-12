@@ -13,8 +13,8 @@ TagManager:
   - UI
   - Violet
   - Enemy
-  - 
-  - 
+  - Item
+  - Point
   - 
   - 
   - 
@@ -46,6 +46,9 @@ TagManager:
     locked: 0
   - name: Ground
     uniqueID: 2934459605
+    locked: 0
+  - name: Item
+    uniqueID: 3748767185
     locked: 0
   - name: Enemy
     uniqueID: 3791536521

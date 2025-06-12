@@ -1,5 +1,5 @@
 using UnityEngine;
-
+// the most complex system of the game
 public class Violet : Mobs
 {
     public VioletIdleState idleState { get;private set; }
@@ -38,18 +38,18 @@ public class Violet : Mobs
     
     
     [Header("Long Jump Settings")]
-    [SerializeField] private float minJumpHeight = 1.5f;   // 短跳最小高度
-    [SerializeField] private float maxJumpHeight = 3f;     // 长跳最大高度
-    [SerializeField] public float jumpTimeThreshold = 0.5f; // 长按时间阈值
+    [SerializeField] private float minJumpHeight = 1.5f; 
+    [SerializeField] private float maxJumpHeight = 3f;     
+    [SerializeField] public float jumpTimeThreshold = 0.5f; 
     public bool isJumpRelease = true;
     public float jumpTimer;
     public float floatingSpeed { get; private set; } = 13f;
     public float longJumpSpeed { get; private set; } = 17f;
     public float fallDownSpeed { get; private set; } = 11f;
     private float longJumpRate;
-    public float jumpStartTime;  // 记录跳跃开始时间
-    private bool isPressingJumping;       // 标记是否正在跳跃
-    private bool jumpKeyHeld;     // 标记跳跃键是否被按住
+    public float jumpStartTime;  
+    private bool isPressingJumping;      
+    private bool jumpKeyHeld;   
     public float wallJumpSpeed { get; private set; } = 17f;
     public float wallJumpTotalTimeThreshold { get; private set; } = 0.35f;
     public float wallJump1TimeThreshold { get; private set; } = 0.15f;
@@ -83,7 +83,7 @@ public class Violet : Mobs
         fireballState = new VioletFireballState(stateMachine, this, "Fireball");
         recoverState = new VioletRecoverState(stateMachine, this, "Recover");
         deadState = new VioletDeadState(stateMachine, this, "Dead");
-        
+        violetStats = GetComponent<VioletStats>();
         
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -91,7 +91,7 @@ public class Violet : Mobs
     {
 
         base.Start();
-        violetStats = GetComponent<VioletStats>();
+
         
         stateMachine.Initialize(idleState);
         
@@ -100,11 +100,11 @@ public class Violet : Mobs
         longJumpSpeed = 14;
         fallDownSpeed = 11;
         jumpTimeThreshold = 0.4f;
-        // facingDirection = 1;
+
         longJumpRate = (float)0.025;
         facingRight = true;
         
-        //GroundCheckDistance = (float)1.26;
+    
     }
 
     // Update is called once per frame
@@ -113,16 +113,7 @@ public class Violet : Mobs
         stateMachine.currentState.Update();
         DashCheck();
         AttackCheck();
-        // base.Update();
-        // CheckInput();
-        // Movement();
-        // JumpCheck();
-        //
-        // comboTimeWindow -= Time.deltaTime;
-        // HandleJumpHeight(); // 跳高控制
-        // FlipController();
-        // AnimatorController();
-        // Debug.Log(isGrounded);
+
     }
     
     
@@ -130,13 +121,13 @@ public class Violet : Mobs
     {
         if (isPressingJumping)
         {
-            // 只有在按住跳跃键时才增加跳跃高度
+    
             if (jumpKeyHeld && Time.time - jumpStartTime < jumpTimeThreshold)
             {
-                // 持续施加跳跃力
+     
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y + longJumpSpeed * longJumpRate);
             }
-            // 当松开跳跃键或达到最大时间时结束跳跃状态
+
             else if (!jumpKeyHeld || Time.time - jumpStartTime >= jumpTimeThreshold)
             {
                 isPressingJumping = false;
@@ -147,7 +138,7 @@ public class Violet : Mobs
 
     private void JumpCheck()
     {
-        // 落地时重置跳跃状态
+
         if (isGrounded && rb.linearVelocity.y <= 0)
         {
             isPressingJumping = false;
@@ -158,23 +149,18 @@ public class Violet : Mobs
     {
         xInput = Input.GetAxisRaw("Horizontal");
 
-        // 检测跳跃键按下
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             jumpKeyHeld = true;
             Jump();
         }
 
-        // 检测跳跃键释放
         if (Input.GetKeyUp(KeyCode.Space))
         {
             jumpKeyHeld = false;
         }
-        // dashTime -= Time.deltaTime;
-        // if (dashTime <  - dashCoolDownTime && Input.GetKeyDown(KeyCode.F))
-        // {
-        //     dashTime = dashDuration;
-        // }
+
 
         if (Input.GetKeyDown(KeyCode.J))
         {
@@ -190,49 +176,29 @@ public class Violet : Mobs
     private void DashCheck()
     {
         
-        if (Input.GetKey(KeyCode.F) && SkillManager.instance.dashSkill.CanUseSkill())
+        if (Input.GetKey(KeyCode.F) && SkillManager.instance.dashSkill.CanUseSkill() && violetStats.GetCurrentHealth() > 0)
         {
             SkillManager.instance.dashSkill.UseSkill();
             stateMachine.ChangeState(dashState);
             // dashTimer = dashCoolDownTime;
         }
     }
-    
-    // private void Movement()
-    // {
-    //     if (dashTimer > 0)
-    //     {
-    //         rb.linearVelocity = new Vector2(facingDirection * dashSpeed, 0);
-    //     }
-    //     else
-    //     {
-    //         rb.linearVelocity = new Vector2(xInput * horizonSpeed, rb.linearVelocity.y);
-    //     }
-    // }
+
 
     private void Jump()
     {
         if (isGrounded)
         {
-            // 记录跳跃开始时间
+
             jumpStartTime = Time.time;
             isPressingJumping = true;
-            
-            // 应用基础跳跃速度
+
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y + longJumpSpeed * longJumpRate);
         }
     }
 
-    // private void AnimatorController()
-    // {
-    //     isMoving = rb.linearVelocity.x != 0;
-    //     anim.SetBool("isMoving", isMoving);
-    //     anim.SetBool("isGrounded", isGrounded);
-    //     anim.SetBool("isDashing", dashTimer > 0);
-    //     anim.SetBool("isAttacking", isAttacking);
-    //     anim.SetInteger("comboCounter", comboCounter);
-    // }
 
+// set the velocity and control the facing direction
     public override void SetVelocity(float _XVelocity, float _YVelocity)
     {
         rb.linearVelocity = new Vector2(_XVelocity, _YVelocity);
@@ -251,8 +217,7 @@ public class Violet : Mobs
         }
             
     }
-
-
+    
 
     public void AttackOver()
     {
@@ -282,19 +247,9 @@ public class Violet : Mobs
         Gizmos.DrawWireSphere(attackCheck.position, attackCheckRadius);
     }
 
-    // public float jumpSpeedFunc(float time)
-    // {
-    //     
-    // }
 
     public void AnimEndTrigger() => stateMachine.currentState.AnimFinishTrigger();
-
-    // public override void Damage()
-    // {
-    //     base.Damage();
-    //     StartCoroutine("HitKnockback");
-    //
-    // }
+    
 
     public override void Die()
     {

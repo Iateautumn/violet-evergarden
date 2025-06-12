@@ -4,13 +4,12 @@ public class HealthBar : MonoBehaviour
 {
     public Slider slider;
 
-    public void SetMaxHealth(int maxHealth)
+    public virtual void SetMaxHealth(int maxHealth)
     {
         slider.maxValue = maxHealth;
-        Debug.Log("hello");
         slider.value = maxHealth;
     }
-    public void SetHealthBar(int health)
+    public virtual void SetHealthBar(int health)
     {
         slider.value = health;
     }

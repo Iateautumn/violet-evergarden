@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.VFX;
-
+// the parent of Player and mobs
 public class Mobs : MonoBehaviour
 {
     public Rigidbody2D rb; //{ get; private set; }
@@ -42,15 +42,7 @@ public class Mobs : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         mf = GetComponent<MobsFlash>();
         charStats = GetComponent<CharStats>();
-        //
-        //
-        // Debug.Log(anim.name);
 
-
-        // if (wallCheck == null)
-        // {
-        //     wallCheck = transform;
-        // }
     }
 
     // Update is called once per frame

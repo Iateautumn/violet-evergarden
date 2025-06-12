@@ -29,6 +29,7 @@ public class VioletWallJumpState : VioletState
             stateMachine.ChangeState(violet.idleState);
         }
     }
+    // the longer space pressed, the higher player jump
     public void longJump()
     {
         if (!violet.isJumpRelease && Input.GetKeyUp(KeyCode.Space))

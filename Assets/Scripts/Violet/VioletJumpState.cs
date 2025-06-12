@@ -24,11 +24,7 @@ public class VioletJumpState : VioletState
             return;
         }
         longJump();
-
-        // if (violet.isWallDetected())
-        // {
-        //     violet.stateMachine.ChangeState(violet.wallSlideState);
-        // }
+        
 
         violet.SetVelocity(xInput * violet.moveSpeed, rb.linearVelocity.y);
         if (rb.linearVelocity.y <= 0)

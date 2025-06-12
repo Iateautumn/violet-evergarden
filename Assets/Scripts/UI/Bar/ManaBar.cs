@@ -5,13 +5,13 @@ public class ManaBar : MonoBehaviour
 {
     public Slider slider;
 
-    public void SetMaxMana(int maxMana)
+    public virtual void SetMaxMana(int maxMana)
     {
         slider.maxValue = maxMana;
         slider.value = maxMana;
     }
 
-    public void SetManaBar(int mana)
+    public virtual void SetManaBar(int mana)
     {
         slider.value = mana;
     }

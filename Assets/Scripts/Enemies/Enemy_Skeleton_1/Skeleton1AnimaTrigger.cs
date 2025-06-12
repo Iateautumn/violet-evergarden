@@ -21,4 +21,9 @@ public class Skeleton1AnimaTrigger : MonoBehaviour
             }
         }
     }
+
+    private void Attack1Start()
+    {
+        GetComponent<MobsSEF>().PlaySound(MobsSEF.SoundType.Attack);
+    }
 }

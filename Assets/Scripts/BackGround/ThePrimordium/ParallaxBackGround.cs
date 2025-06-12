@@ -1,5 +1,5 @@
 using UnityEngine;
-
+//this scripts is for helping the background move with camera
 public class ParallaxBackGround : MonoBehaviour
 {
     private GameObject camera;

@@ -1,5 +1,5 @@
 using UnityEngine;
-
+// when mobs preparing to attack, increase it's speed
 public class Skeleton1BattleState : Skeleton1State
 {
     private Transform player;

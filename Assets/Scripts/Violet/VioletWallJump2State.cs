@@ -17,7 +17,6 @@ public class VioletWallJump2State : VioletState
     public override void Update()
     {
         base.Update();
-        Debug.Log("hello");
         if (!violet.isJumpRelease && Input.GetKeyUp(KeyCode.Space) || violet.jumpTimer < 0)
         {
             violet.isJumpRelease = true;

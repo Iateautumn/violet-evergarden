@@ -1,12 +1,13 @@
 using UnityEngine;
-
+//character states, parent class of all stat class
 public class CharStats : MonoBehaviour
 {
     public Stat damage;
     public Stat maxHealth;
     public Stat maxMana;
-    [SerializeField] private int currentHealth;
-    [SerializeField] private int currentMana;
+    [SerializeField] protected int currentHealth;
+    [SerializeField] protected int currentMana;
+    protected bool isDead = false;
     protected virtual void Start()
     {
         currentHealth = maxHealth.GetValue();   
@@ -22,13 +23,15 @@ public class CharStats : MonoBehaviour
     // Update is called once per frame
     public virtual void TakeDamage(int damageNum, float direction)
     {
-        currentHealth -= damageNum;
-
-        if (currentHealth <= 0)
+        if (!isDead)
         {
-            Die();
+            currentHealth -= damageNum;
+            if (currentHealth <= 0)
+            {
+                isDead = true;
+                Die();
+            }
         }
-        
     }
 
     public int GetCurrentHealth()

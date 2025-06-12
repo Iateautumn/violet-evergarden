@@ -17,11 +17,7 @@ public class VioletAirAttackState : VioletState
         longJump();
         if (triggerCalled && rb.linearVelocity.y <= 0)
         {
-            // if (rb.linearVelocity.y >= 0)
-            // {
-            //     stateMachine.ChangeState(violet.jumpState);
-            // }
-            // else
+
             stateMachine.ChangeState(violet.airState);
             return;
             // }

@@ -6,8 +6,26 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/MainMenu.unity
+    guid: cb614ba72cb30884ea8bd66ca8fd46a1
+  - enabled: 1
+    path: Assets/Scenes/ThePrimordium.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/SunspireVillage.unity
+    guid: 948cc75b81167d14599a6351473a8545
+  - enabled: 1
+    path: Assets/Scenes/Dungeon.unity
+    guid: 9f2da799d9a393740896fefeef086a17
+  - enabled: 1
+    path: Assets/Scenes/UnderDungeon.unity
+    guid: 70cd08f6645d6f3498b5e07ca90c22e8
+  - enabled: 1
+    path: Assets/Scenes/EWizardRoom.unity
+    guid: 60ee2fd1ff219324fa31f1f92efd03f1
+  - enabled: 1
+    path: Assets/Scenes/VioletEvergarden.unity
+    guid: 104722ec1ea405041860dc5332985f5d
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

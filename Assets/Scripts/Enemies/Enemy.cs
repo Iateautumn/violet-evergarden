@@ -1,8 +1,8 @@
 using UnityEngine;
-
+// the parent class of specified enemies
 public class Enemy : Mobs
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     
     public EnemyStateMachine stateMachine;
     

@@ -33,7 +33,7 @@ public class Skeleton1 : Enemy
         attackState = new Skeleton1AttackState(this, stateMachine, "Attack", this);
         deadState = new Skeleton1DeadState(this,stateMachine, "Dead", this);
     }
-
+//to help determine the distance of sth like attack
     protected override void OnDrawGizmos()
     {
         base.OnDrawGizmos();

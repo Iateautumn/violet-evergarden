@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EWizardAnimTrigger : MonoBehaviour
 {
 
     private EWizard eWizard => GetComponentInParent<EWizard>();
+    private MobsSEF mobsSef => GetComponentInChildren<MobsSEF>();
 
     private void AnimTrigger()
     {
@@ -73,7 +75,8 @@ public class EWizardAnimTrigger : MonoBehaviour
     private void TeleportAboveTrigger()
     {
         Vector2 position = PlayerManager.instance.violet.transform.position;
-        position.y = position.x + eWizard.attackCheckRadius;
+        position.y = position.y + eWizard.attackCheckRadius;
+        Debug.Log("position" + position);
         bool isInGround = Physics2D.OverlapPoint(position, LayerMask.GetMask("Ground")) != null;
         if (!isInGround)
         {
@@ -84,6 +87,7 @@ public class EWizardAnimTrigger : MonoBehaviour
     private void JumpAttackFireball()
     {
         MobRangedAttackManager.instance.eWizardFireball.Create2SideFireball(eWizard);
+        FallDownSETrigger();
     }
 
     private void JumpAttackTrigger()
@@ -99,5 +103,33 @@ public class EWizardAnimTrigger : MonoBehaviour
             }
         }
     }
-    
+
+    private void HackSETrigger()
+    {   
+        mobsSef.PlaySound(MobsSEF.SoundType.Attack);
+    }
+    private void FireballSETrigger()
+    {   
+        mobsSef.PlaySound(MobsSEF.SoundType.Fireball);
+    }
+    private void FallDownSETrigger()
+    {   
+        mobsSef.PlaySound(MobsSEF.SoundType.FallDown);
+    }
+    private void TeleportSETrigger()
+    {
+        mobsSef.PlaySound(MobsSEF.SoundType.Teleport);
+    }
+
+    private void DeathSETrigger()
+    {
+        mobsSef.PlaySound(MobsSEF.SoundType.Death);
+    }
+
+    private void EndingTrigger()
+    {
+        SaveManager.instance.SaveGame();
+        BGMManager.instance.PlayBGM("light");
+        SceneManager.LoadScene("VioletEvergarden");
+    }
 }

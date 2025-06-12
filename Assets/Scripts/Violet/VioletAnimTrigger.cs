@@ -1,9 +1,12 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class VioletAnimTrigger : MonoBehaviour
 {
     private Violet violet => PlayerManager.instance.violet;
-        //GetComponentInParent<Violet>();
+    private MobsSEF mobsSEF => violet.GetComponentInChildren<MobsSEF>();
 
     private void AnimTrigger()
     {
@@ -40,6 +43,34 @@ public class VioletAnimTrigger : MonoBehaviour
             violet.charStats.Recover(SkillManager.instance.recoverSkill.recoverHealth);
         }
 
+    }
+
+    private void AttackSETrigger()
+    {
+        mobsSEF.PlaySound(MobsSEF.SoundType.Attack);
+    }
+
+    private void RecoverSETrigger()
+    {
+        mobsSEF.PlaySound(MobsSEF.SoundType.Recover);
+    }
+
+    private void FireballSETrigger()
+    {
+        mobsSEF.PlaySound(MobsSEF.SoundType.Fireball);
+    }
+
+    private void DeadTrigger()
+    {
+        SpawnManager.instance.isFirstLoad = true;
+        StartCoroutine(LoadSceneAfterDelay(2f));
+    }
+
+    private IEnumerator LoadSceneAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SpawnManager.instance.loadedItems = Inventory.instance.inventoryItems;
+        SceneManager.LoadScene(SpawnManager.instance.sceneID);
     }
 
     

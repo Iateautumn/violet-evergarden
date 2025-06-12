@@ -1,8 +1,8 @@
 using UnityEngine;
-
+// the boss of the game
 public class EWizard : Enemy
 {
-    // [SerializeField] public float idleTime = 0.5f;
+
 
 
     public bool isGrounded = true;
@@ -23,18 +23,9 @@ public class EWizard : Enemy
     
     #endregion
 
-    [Header("Move Settings")]
-    // [SerializeField] public float moveSpeed;
     
-    [Header("Combat Settings")] 
-    // [SerializeField] public float maxHealth;
-    // [SerializeField] public float health;
-    // // [SerializeField] public float health;
-
     [SerializeField] public float hackWidth;
     
-    // public EWizardStats eWizardStats { get;private set; }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Awake()
     {
         base.Awake();

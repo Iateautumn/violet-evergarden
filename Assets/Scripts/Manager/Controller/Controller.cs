@@ -1,5 +1,5 @@
 using UnityEngine;
-
+// control the ranged attack entity of enemy
 public class Controller : MonoBehaviour
 {
     protected Animator animator;

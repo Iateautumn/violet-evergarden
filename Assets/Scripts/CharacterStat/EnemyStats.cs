@@ -4,9 +4,11 @@ using UnityEngine;
 public class EnemyStats : CharStats
 {
     private Enemy enemy;
+    private ItemDrop myDropSys;
     protected override void Start()
     {
         base.Start();
+        myDropSys = GetComponent<ItemDrop>();
 
     }
 
@@ -18,13 +20,14 @@ public class EnemyStats : CharStats
     public override void TakeDamage(int damageNum, float direction)
     {
         base.TakeDamage(damageNum, direction);
-        Debug.Log("hello");
-        enemy.Damage(direction);
+        if(! isDead)
+            enemy.Damage(direction);
     }
 
     protected override void Die()
     {
         base.Die();
         enemy.Die();
+        myDropSys.GenerateDrops();
     }
 }

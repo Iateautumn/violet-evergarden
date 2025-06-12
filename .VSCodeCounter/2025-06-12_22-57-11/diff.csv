@@ -1,0 +1,21 @@
+"filename", "language", "C#", "comment", "blank", "total"
+"d:\unity_project\My project\Assets\Scripts\Audio\BGMManager.cs", "C#", 82, 0, 16, 98
+"d:\unity_project\My project\Assets\Scripts\Audio\MobsSEF.cs", "C#", 82, 2, 13, 97
+"d:\unity_project\My project\Assets\Scripts\CharacterStat\EnemyStats.cs", "C#", -1, 0, 0, -1
+"d:\unity_project\My project\Assets\Scripts\CharacterStat\VioletStats.cs", "C#", 9, 0, 3, 12
+"d:\unity_project\My project\Assets\Scripts\Enemies\Enemy_Skeleton_1\Skeleton1AnimaTrigger.cs", "C#", 4, 0, 1, 5
+"d:\unity_project\My project\Assets\Scripts\Enemies\EvilWizard\EWizardAnimTrigger.cs", "C#", 23, 0, 1, 24
+"d:\unity_project\My project\Assets\Scripts\Inventory\Inventory.cs", "C#", 6, 0, 0, 6
+"d:\unity_project\My project\Assets\Scripts\Manager\PlayerManager.cs", "C#", 0, 1, 0, 1
+"d:\unity_project\My project\Assets\Scripts\Manager\SpawnAndScene\BossRoomTrigger.cs", "C#", 31, 2, 12, 45
+"d:\unity_project\My project\Assets\Scripts\Manager\SpawnAndScene\SceneLoadTrigger.cs", "C#", 1, 0, 1, 2
+"d:\unity_project\My project\Assets\Scripts\Manager\SpawnAndScene\SpawnManager.cs", "C#", 37, -1, 6, 42
+"d:\unity_project\My project\Assets\Scripts\Manager\SpawnAndScene\Spawner.cs", "C#", 0, 0, 1, 1
+"d:\unity_project\My project\Assets\Scripts\SaveLoad\GameData.cs", "C#", 2, 0, 0, 2
+"d:\unity_project\My project\Assets\Scripts\SaveLoad\SaveManager.cs", "C#", 1, 0, 1, 2
+"d:\unity_project\My project\Assets\Scripts\UI\Backpack\UI.cs", "C#", 8, 0, 1, 9
+"d:\unity_project\My project\Assets\Scripts\UI\MainMenu.cs", "C#", 7, 0, 0, 7
+"d:\unity_project\My project\Assets\Scripts\Violet\VioletAnimTrigger.cs", "C#", 13, 0, 3, 16
+"d:\unity_project\My project\Assets\Scripts\Violet\VioletMoveState.cs", "C#", 2, 0, 0, 2
+"d:\unity_project\My project\Assets\Scripts\Violet\VioletWallJump2State.cs", "C#", -1, 0, 0, -1
+"Total", "-", 306, 4, 59, 369
