@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using UnityEditor;
+// using UnityEditor;
 using UnityEngine;
 
 // Used throughout the entire game to store key information for scene transitions and part of the player's state.
@@ -58,14 +58,16 @@ public class SpawnManager : MonoBehaviour, SaveManagerInterface
     
     private List<ItemData> GetItemDataBase()
     {
-        List<ItemData> itemDatabase = new List<ItemData>();
-        string[] assetNames = AssetDatabase.FindAssets("",new[]{"Assets/Entity/Item"});
-        foreach (string assetName in assetNames)
-        {
-            var SOpath = AssetDatabase.GUIDToAssetPath(assetName);
-            var itemData = AssetDatabase.LoadAssetAtPath<ItemData>(SOpath);
-            itemDatabase.Add(itemData);
-        }
-        return itemDatabase;
+        // List<ItemData> itemDatabase = new List<ItemData>();
+        // string[] assetNames = AssetDatabase.FindAssets("",new[]{"Assets/Entity/Item"});
+        // foreach (string assetName in assetNames)
+        // {
+        //     var SOpath = AssetDatabase.GUIDToAssetPath(assetName);
+        //     var itemData = AssetDatabase.LoadAssetAtPath<ItemData>(SOpath);
+        //     itemDatabase.Add(itemData);
+        // }
+        // return itemDatabase;
+        ItemData[] items = Resources.LoadAll<ItemData>("Items");
+        return new List<ItemData>(items);
     }
 }
