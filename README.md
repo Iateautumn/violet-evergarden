@@ -1,5 +1,7 @@
 # Credit
 
+unity cinimachine
+
 Assets/Graphics/EWizard/*
 https://luizmelo.itch.io/evil-wizard-2 evil-wizard Lisence: CC0
 
